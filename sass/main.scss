@@ -1,0 +1,124 @@
+$tile_height: 70%;
+$tile_width: 100% / 3;
+$half_tile: $tile_width / 2;
+
+$skew_angle: -20deg;
+
+.tile-wrapper {
+  position: absolute;
+  width: 100%;
+  height: $tile_height;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.diagonal-tile_wrapper {
+  transition: all 0.5s ease;
+  width: $tile_width;
+  transform-origin: top left;
+  height: 100%;
+  position: absolute;
+  overflow-x: hidden;
+  animation: none;
+  -webkit-box-shadow: 0px 0px 97px 17px rgba(0,0,0,0.59);
+  -moz-box-shadow: 0px 0px 97px 17px rgba(0,0,0,0.59);
+  box-shadow: 0px 0px 97px 17px rgba(0,0,0,0.59);
+
+  .diagonal-tile {
+    transform: skewX(-$skew_angle);
+    display: block;
+    width: 130%;
+    height: 100%;
+    background-repeat: no-repeat;
+    -webkit-filter: blur(10px) grayscale(100%);
+    filter: gray; //IE 9
+    filter: blur(10px) grayscale(100%);
+
+    .diagonal-tile_container {
+      height: 100%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      display: none;
+    }
+
+  }
+
+  &:hover {
+    z-index: 10 !important;
+
+    .diagonal-tile {
+      -webkit-filter: none;
+      filter: none;
+
+      .diagonal-tile_container {
+        display: block;
+      }
+    }
+  }
+
+}
+
+.diagonal-tile_wrapper:nth-of-type(1) {
+  left: 0;
+  z-index: 3;
+  transform: skewX($skew_angle);
+
+  .diagonal-tile_container {
+    margin-right: $tile_width;
+  }
+
+  &:hover {
+    width: calc(#{$tile_width} + #{$half_tile});
+  }
+}
+
+.diagonal-tile_wrapper:nth-of-type(2) {
+  left: $tile_width;
+  z-index: 2;
+  transform: skewX($skew_angle);
+
+  .diagonal-tile {
+    width: 150%;
+    margin: auto 0;
+    // margin-left: -$half_tile;
+
+    .diagonal-tile_container {
+      margin-right: $tile_width;
+      margin-left: $tile_width;
+    }
+  }
+
+  &:hover {
+    left: calc(#{$tile_width} - (#{$half_tile} / 4));
+    width: calc(#{$tile_width} + (#{$half_tile} / 4));
+  }
+}
+
+.diagonal-tile_wrapper:nth-of-type(3) {
+  width: calc(#{$tile_width} + #{$half_tile});
+  left: calc(#{$tile_width} * 2);
+  z-index: 1;
+  transform: skewX($skew_angle);
+
+  .diagonal-tile {
+    margin-left: -$half_tile;
+
+    .diagonal-tile_container {
+      margin-left: $tile_width;
+    }
+  }
+
+  &:hover {
+    width: calc(#{$tile_width} + #{$tile_width});
+    left: calc(#{$tile_width} * 1.8);
+  }
+}
+
+.content-wrapper {
+  position: absolute;
+  top: $tile_height;
+  left: 0;
+  width: 100%;
+}

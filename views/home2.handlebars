@@ -1,0 +1,32 @@
+{{> floatingnav}}
+<main role="main">
+
+  <div class="tile-wrapper">
+
+    <div class="diagonal-tile_wrapper" >
+      <div class="diagonal-tile diagonal-tile_photo">
+        <div class="diagonal-tile_container" style="background-image: url('{{data.0.cover_landscape}}');">
+          <h1 class="tile_problem">{{data.0.problem}}</h1>
+          <a href="https://www.dosomething.org/us/node/{{data.0.nid}}" class="do-something-button tile_cta">{{data.0.cta}}</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="selector">
+      <div class="top-angle"></div>
+      <p id="{{data.0.nid}}" class="selector_campaign selected">{{data.0.title}}</p>
+      {{#each data}}
+        {{#unless (firstIndex @index)}}
+          <p id="{{this.nid}}" class="selector_campaign">{{this.title}}</p>
+        {{/unless}}
+      {{/each}}
+    </div>
+
+    {{> footer}}
+
+  </div>
+</main>
+
+<script>
+  var campaignData = {{{data_string}}};
+</script>

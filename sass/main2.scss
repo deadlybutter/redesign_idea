@@ -1,0 +1,226 @@
+// We define some of our own variables and mixins to keep things DRY.
+@import "../node_modules/@dosomething/forge/scss/_utilities/variables";
+@import "../node_modules/@dosomething/forge/scss/_utilities/functions";
+@import "../node_modules/@dosomething/forge/scss/_utilities/mixins";
+@import "../node_modules/@dosomething/forge/scss/_utilities/data";
+
+// Base
+@import "../node_modules/@dosomething/forge/scss/_base/reset";
+@import "../node_modules/@dosomething/forge/scss/_base/fonts";
+@import "../node_modules/@dosomething/forge/scss/_base/animations";
+@import "../node_modules/@dosomething/forge/scss/_base/base";
+@import "../node_modules/@dosomething/forge/scss/_base/helpers";
+
+$tile_height: 90%;
+
+$skew_angle: -2deg;
+
+.navigation__logo {
+
+  &:after {
+    filter: opacity(0.5);
+    -webkit-filter: opacity(0.5);
+  }
+
+  &:hover {
+    &:after {
+      filter: none;
+      -webkit-filter: none;
+    }
+  }
+
+}
+
+.navigation__secondary {
+  .navigation__primary, .navigation__dropdown {
+    a {
+      color: rgba(#FFF, 0.4);
+    }
+
+    &:hover {
+      color: #FFF;
+    }
+  }
+
+  a:hover {
+    color: #FFF;
+    text-decoration: none;
+  }
+}
+
+.do-something-button {
+  padding: 16px;
+  border: 1px solid #FFF;
+  color: #FFF;
+  text-shadow: $text-shadow;
+  box-shadow: $box-shadow;
+  font-family: $base-font-family;
+  font-size: $font-larger;
+  font-weight: $weight-sbold;
+  transition: all .5s ease;
+
+  &:hover {
+    color: #FFF;
+    padding-left: $base-spacing * 2;
+    padding-right: $base-spacing * 2;
+  }
+
+}
+
+.tile-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.diagonal-tile_wrapper {
+  width: 100%;
+  transform-origin: top left;
+  height: $tile_height;
+  overflow: hidden;
+  transform: skewY($skew_angle);
+
+  // Removes jagged edges
+  outline: 1px solid transparent;
+  -webkit-backface-visibility: hidden;
+
+  .diagonal-tile {
+    transform: skewY(-$skew_angle);
+    display: block;
+    width: 100%;
+    height: 110%;
+    padding-top: 10%;
+
+
+    .diagonal-tile_container {
+      position: relative;
+      padding: $base-spacing;
+      text-align: center;
+      background-size: 0;
+
+      h1 {
+        font-size: $font-hero;
+        color: #FFF;
+        text-shadow: 0 1px 3px rgba(0,0,0,1);
+        margin: 4%;
+
+        font-family: $accent-font-family;
+      }
+    }
+
+    .diagonal-tile_container:before {
+      content: "";
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      background-image: inherit;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+      -webkit-filter: blur(5px);
+      -moz-filter: blur(5px);
+      -o-filter: blur(5px);
+      -ms-filter: blur(5px);
+      filter: blur(5px);
+    }
+
+  }
+
+}
+
+.selector {
+  background-color: #111;
+  color: $light-gray;
+  text-align: center;
+
+  .selector_campaign {
+    display: inline-block;
+    margin: $base-spacing;
+    padding-bottom: $base-spacing / 2;
+    font-size: $font-regular;
+    cursor: pointer;
+
+    &:hover {
+      border-bottom: 1px solid $light-gray;
+    }
+  }
+
+  .selected {
+    border-bottom: 1px solid $light-gray;
+  }
+
+  .top-angle {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    bottom: 0;
+    background-color: inherit;
+    z-index: -1;
+  }
+
+}
+
+.footer-message {
+  background-color: #111;
+  padding: $base-spacing * 2 0;
+  text-align: center;
+
+  h1 {
+    color: #FFF;
+    font-size: $font-larger;
+    font-weight: $weight-bold;
+    text-shadow: $text-shadow;
+    padding-bottom: $base-spacing;
+  }
+
+  a {
+    font-size: $font-medium;
+  }
+}
+
+.container--sponsors {
+  text-align: center;
+  background-color: #000;
+  padding-bottom: $base-spacing;
+
+  h4 {
+    color: $dark-gray;
+    padding: $base-spacing 0;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 $base-spacing;
+  }
+
+  img {
+    max-width: 90px;
+    max-height: 30px;
+    vertical-align: middle;
+    opacity: 0.2;
+
+    @include media($tablet) {
+      // retina sizing, see Image Style preset
+      max-width: 125px;
+      max-height: 40px;
+    }
+  }
+
+}
+
+.footer {
+  .footer__columns {
+    padding: 0 20%;
+  }
+}
