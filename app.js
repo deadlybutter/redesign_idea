@@ -26,8 +26,8 @@ app.use(sassMiddleware({
     prefix:  '/prefix'
 }));
 
-app.use(express.static(process.env.PWD || __dirname + '/public'));
-app.use(express.static(process.env.PWD || __dirname + '/node_modules/@dosomething/forge/dist'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'node_modules/@dosomething/forge/dist')));
 
 var campaignData = [];
 var campaignDataString = "";
@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 });
 
 request
-  .get('https://www.dosomething.org/api/v1/campaigns?ids=1144,6078,3271')
+  .get('https://www.dosomething.org/api/v1/campaigns?ids=1144,3271,3567')
   .end(function(err, raw_api_res) {
     api_res = JSON.parse(raw_api_res.text).data;
     api_res.forEach(function(element, index, array) {
