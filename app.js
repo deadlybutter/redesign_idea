@@ -26,8 +26,8 @@ app.use(sassMiddleware({
     prefix:  '/prefix'
 }));
 
-app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/node_modules/@dosomething/forge/dist'));
+app.use(express.static(process.env.PWD || __dirname + '/public'));
+app.use(express.static(process.env.PWD || __dirname + '/node_modules/@dosomething/forge/dist'));
 
 var campaignData = [];
 var campaignDataString = "";
