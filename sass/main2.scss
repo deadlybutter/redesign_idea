@@ -35,6 +35,7 @@ $skew_angle: -2deg;
   .navigation__primary, .navigation__dropdown {
     a {
       color: rgba(#FFF, 0.4);
+      font-weight: $weight-bold;
     }
 
     &:hover {
@@ -105,6 +106,7 @@ $skew_angle: -2deg;
         color: #FFF;
         text-shadow: 0 1px 3px rgba(0,0,0,1);
         margin: 4%;
+        margin-top: 0;
 
         font-family: $accent-font-family;
       }

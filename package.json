@@ -9,6 +9,7 @@
   "author": "Joe Kent",
   "license": "ISC",
   "dependencies": {
+    "@dosomething/forge": "^6.6.2",
     "express": "^4.13.3",
     "express-handlebars": "^2.0.1",
     "node-sass-middleware": "^0.9.7",
