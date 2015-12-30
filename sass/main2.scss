@@ -76,11 +76,11 @@ $skew_angle: -2deg;
 
 .do-something-button_white {
   border: none;
-  color: #111;
+  color: $off-black;
   background-color: #FFF;
 
   &:hover {
-    color: #111;
+    color: $off-black;
   }
 }
 
@@ -136,7 +136,7 @@ $skew_angle: -2deg;
         display: inline;
         font-size: $font-hero;
         color: #FFF;
-        background-color: #111;
+        background-color: $off-black;
         text-shadow: 0 1px 3px rgba(0,0,0,1);
         font-family: $accent-font-family;
 
@@ -171,7 +171,7 @@ $skew_angle: -2deg;
 }
 
 .selector {
-  background-color: #111;
+  background-color: $off-black;
   color: $light-gray;
   text-align: center;
 
@@ -203,7 +203,7 @@ $skew_angle: -2deg;
 }
 
 .footer-message {
-  background-color: #111;
+  background-color: $off-black;
   padding: $base-spacing * 2 0;
   text-align: center;
 
@@ -220,13 +220,36 @@ $skew_angle: -2deg;
   }
 }
 
+.footer-container {
+  overflow: hidden;
+  background: url(confetti_gif.gif);
+  background-position: 50% 0;
+  background-size: cover;
+
+  @include media($desktop) {
+    background-position: 1000px 0;;
+  }
+
+  .footer-wrapper {
+    background-color: #028BCE;
+    transform: skewX(20deg);
+    transform-origin: bottom;
+    box-shadow: $box-shadow;
+  }
+}
+
 .container--sponsors {
   text-align: center;
-  background-color: #000;
+  margin-left: 285px;
   padding-bottom: $base-spacing;
+  transform: skewX(-20deg);
+
+  @include media($mobile) {
+    margin-left: 150px;
+  }
 
   h4 {
-    color: $dark-gray;
+    color: $light-gray;
     padding: $base-spacing 0;
   }
 
@@ -245,6 +268,7 @@ $skew_angle: -2deg;
     max-height: 30px;
     vertical-align: middle;
     opacity: 0.2;
+    -webkit-filter: brightness(-100%) invert(100%);//temp hack cause of how the images are already black
 
     @include media($tablet) {
       // retina sizing, see Image Style preset
@@ -256,6 +280,23 @@ $skew_angle: -2deg;
 }
 
 .footer {
+  background: none;
+  transform: skewX(-20deg);
+  margin-left: 39px;
+
+  h4 {
+    color: #FFF;
+    font-weight: $weight-sbold;
+  }
+
+  a {
+    color: $light-gray;
+
+    &:hover {
+      color: #FFF;
+    }
+  }
+
   .footer__columns {
     padding: 0 20%;
   }

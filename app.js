@@ -12,6 +12,13 @@ app.engine('handlebars', exphbs({
     firstIndex: function(index) {
       return index == 0;
     },
+    lastIndex: function(index, array) {
+      console.log(index, array.length - 1);
+      return index == array.length - 1;
+    },
+    getHalf: function(array) {
+      return array.slice().splice(Math.floor(array.length / 2), array.length);
+    }
   }
 }));
 app.set('view engine', 'handlebars');
@@ -29,15 +36,17 @@ app.use(sassMiddleware({
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules/@dosomething/forge/dist')));
 
+var campaignNids = process.env.nids || "1144,3271,3567";
 var campaignData = [];
 var campaignDataString = "";
+var reportbackData = [];
 
 app.get('/', function(req, res) {
-  res.render('home2', {"data": campaignData, "data_string": campaignDataString, "showSponsors": true});
+  res.render('home2', {"data": campaignData, "data_string": campaignDataString, "showSponsors": true, "reportbacks": reportbackData});
 });
 
 request
-  .get('https://www.dosomething.org/api/v1/campaigns?ids=1144,3271,3567')
+  .get('https://www.dosomething.org/api/v1/campaigns?ids=' + campaignNids)
   .end(function(err, raw_api_res) {
     api_res = JSON.parse(raw_api_res.text).data;
     api_res.forEach(function(element, index, array) {
@@ -51,11 +60,20 @@ request
       });
     });
     campaignDataString = JSON.stringify(campaignData);
-    console.log(campaignData);
-    var server = app.listen(process.env.PORT || 3000, function () {
-      var host = server.address().address;
-      var port = server.address().port;
 
-      console.log('Example app listening at http://%s:%s', host, port);
-    });
+    request
+      .get('https://www.dosomething.org/api/v1/reportback-items?campaigns=' + campaignNids + '&status=promoted,approved&count=16&random=true')
+      .end(function(err, raw_api_res) {
+        api_res = JSON.parse(raw_api_res.text).data;
+        api_res.forEach(function(element, index, array) {
+          reportbackData.push(element.media.uri);
+        });
+        console.log(reportbackData);
+        var server = app.listen(process.env.PORT || 3000, function () {
+          var host = server.address().address;
+          var port = server.address().port;
+
+          console.log('Example app listening at http://%s:%s', host, port);
+        });
+      });
   });
