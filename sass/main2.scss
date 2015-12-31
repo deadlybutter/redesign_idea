@@ -15,6 +15,9 @@ $tile_height: 90%;
 
 $skew_angle: -2deg;
 
+$footer_skew_angle: 20deg;
+$footer_skew_angle_mobile: 10deg;
+
 .navigation__logo {
 
   &:after {
@@ -119,6 +122,7 @@ $skew_angle: -2deg;
 
       @include media($mobile) {
         padding: $base-spacing + 4 0;
+        padding-top: 48px;
       }
 
       .highlight {
@@ -182,6 +186,10 @@ $skew_angle: -2deg;
     font-size: $font-regular;
     cursor: pointer;
 
+    @include media($mobile) {
+      padding-bottom: 3px;
+    }
+
     &:hover {
       border-bottom: 1px solid $light-gray;
     }
@@ -232,9 +240,13 @@ $skew_angle: -2deg;
 
   .footer-wrapper {
     background-color: #028BCE;
-    transform: skewX(20deg);
+    transform: skewX($footer_skew_angle);
     transform-origin: bottom;
     box-shadow: $box-shadow;
+
+    @include media($mobile) {
+      transform: skewX($footer_skew_angle_mobile);
+    }
   }
 }
 
@@ -242,10 +254,11 @@ $skew_angle: -2deg;
   text-align: center;
   margin-left: 285px;
   padding-bottom: $base-spacing;
-  transform: skewX(-20deg);
+  transform: skewX(-$footer_skew_angle);
 
   @include media($mobile) {
-    margin-left: 150px;
+    margin-left: 75px;
+    transform: skewX(-$footer_skew_angle_mobile);
   }
 
   h4 {
@@ -281,8 +294,13 @@ $skew_angle: -2deg;
 
 .footer {
   background: none;
-  transform: skewX(-20deg);
   margin-left: 39px;
+
+  transform: skewX(-$footer_skew_angle);
+
+  @include media($mobile) {
+    transform: skewX(-$footer_skew_angle_mobile);
+  }
 
   h4 {
     color: #FFF;
@@ -299,5 +317,26 @@ $skew_angle: -2deg;
 
   .footer__columns {
     padding: 0 20%;
+
+    @include media($mobile) {
+      padding-left: 25px;
+
+      .footer__column {
+        border-bottom: 1px solid #FFF;
+
+        h4:after {
+          color: #FFF;
+        }
+      }
+    }
+  }
+
+  .footer__subfooter {
+    border-top: 1px solid #FFF;
+
+    @include media($mobile) {
+      margin-left: -39px;
+      margin-right: 7%;
+    }
   }
 }
