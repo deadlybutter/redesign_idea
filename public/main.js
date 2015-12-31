@@ -9,6 +9,9 @@ $(document).on('ready', function() {
       $('.tile_cta').attr('href', 'https://www.dosomething.org/us/node/' + element.nid);
       $('.selected').removeClass('selected');
       $(this).addClass('selected');
+      $('html, body').animate({
+        scrollTop: 0
+      }, 500);
     });
   });
 });
